@@ -61,10 +61,7 @@ namespace Unity.TestFramework.Build
                     break;
                 case BuildTarget.StandaloneLinux64:
                 case BuildTarget.StandaloneOSX:
-                    PlayerSettings.productName = "PlayerWithTests";
-                    break;
                 case BuildTarget.XboxOne:
-                    playerOptions.options &= ~BuildOptions.ConnectToHost;
                     PlayerSettings.productName = "PlayerWithTests";
                     break;
                 default:
