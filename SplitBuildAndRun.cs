@@ -75,6 +75,7 @@ namespace Unity.TestFramework.Build
                 case BuildTarget.XboxOne:
                 case BuildTarget.Android:
                     PlayerSettings.productName = "PlayerWithTests";
+                    playerOptions.options &= ~BuildOptions.ConnectToHost;
                     break;
                 default:
                     break;
