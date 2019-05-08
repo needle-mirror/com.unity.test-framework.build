@@ -59,10 +59,12 @@ namespace Unity.TestFramework.Build
                     playerOptions.options |= BuildOptions.SymlinkLibraries;
                     playerOptions.options &= ~BuildOptions.ConnectToHost;
                     break;
+                case BuildTarget.StandaloneLinux64:
                 case BuildTarget.StandaloneOSX:
                     PlayerSettings.productName = "PlayerWithTests";
                     break;
                 case BuildTarget.XboxOne:
+                    playerOptions.options &= ~BuildOptions.ConnectToHost;
                     PlayerSettings.productName = "PlayerWithTests";
                     break;
                 default:
