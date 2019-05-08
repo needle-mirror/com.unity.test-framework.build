@@ -6,6 +6,10 @@ using UnityEditor.TestTools;
 using UnityEngine;
 using UnityEngine.TestTools;
 
+
+using UnityEngine.Scripting;
+[assembly: Preserve]
+
 [assembly: TestPlayerBuildModifier(typeof(SplitBuildAndRun))]
 [assembly: PostBuildCleanup(typeof(SplitBuildAndRun))]
 
@@ -24,6 +28,7 @@ namespace Unity.TestFramework.Build
         /// <returns></returns>
         public BuildPlayerOptions ModifyOptions(BuildPlayerOptions playerOptions)
         {
+            Debug.Log("Modifying options");
             var buildDirectoryPath = GetPlayerBuildDirectoryPath();
             if (buildDirectoryPath == null)
             {
@@ -62,6 +67,7 @@ namespace Unity.TestFramework.Build
                 case BuildTarget.StandaloneLinux64:
                 case BuildTarget.StandaloneOSX:
                 case BuildTarget.XboxOne:
+                case BuildTarget.Android:
                     PlayerSettings.productName = "PlayerWithTests";
                     break;
                 default:
@@ -85,4 +91,26 @@ namespace Unity.TestFramework.Build
             return null;
         }
     }
+
+#if UNITY_ANDROID
+[InitializeOnLoad]
+public class SetupProject
+{
+    static SetupProject()
+    {
+        string sdkPath = Environment.GetEnvironmentVariable("ANDROID_SDK_ROOT");
+        if(sdkPath != string.Empty)
+        {
+            UnityEditor.Android.AndroidExternalToolsSettings.sdkRootPath = sdkPath;
+            Debug.Log($"SDK Path was set from ANDROID_SDK_ROOT = {sdkPath}");
+        }
+        else
+        {
+            Debug.LogWarning($"ANDROID_SDK_ROOT was not set.\nCurrently using SDK from here: {UnityEditor.Android.AndroidExternalToolsSettings.sdkRootPath}");
+        }
+    }
+}
+#endif
+
+
 }
