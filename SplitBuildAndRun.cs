@@ -61,11 +61,17 @@ namespace Unity.TestFramework.Build
             switch (playerOptions.target)
             {
                 case BuildTarget.iOS:
+#if UNITY_2021_2_OR_NEWER
+                    playerOptions.options |= BuildOptions.SymlinkSources;
+#else
                     playerOptions.options |= BuildOptions.SymlinkLibraries;
+#endif
                     playerOptions.options &= ~BuildOptions.ConnectToHost;
                     break;
                 case BuildTarget.StandaloneLinux64:
                 case BuildTarget.StandaloneOSX:
+                case BuildTarget.StandaloneWindows64:
+                case BuildTarget.StandaloneWindows:
                 case BuildTarget.XboxOne:
                 case BuildTarget.Android:
                     PlayerSettings.productName = "PlayerWithTests";

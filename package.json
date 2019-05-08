@@ -1,7 +1,7 @@
 {
   "name": "com.unity.test-framework.build",
   "displayName": "Build options modifier",
-  "version": "0.0.1-preview.12",
+  "version": "0.0.1-preview.14",
   "unity": "2019.2",
   "unityRelease": "0a11",
   "description": "Entry point to modify build options, before building a player",
@@ -12,11 +12,14 @@
   ],
   "category": "Unity Test Framework",
   "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/com.unity.test-framework.build.git",
     "type": "git",
-    "url": "git@github.cds.internal.unity3d.com:unity/com.unity.test-framework.build.git",
-    "revision": "9bb22664a1acb5c887936426fb26fd51e9d7ff68"
+    "revision": "e1e0897f772e9cf706d07acd45ae4fee456292ef"
   },
   "dependencies": {
     "com.unity.test-framework": "1.0.17"
+  },
+  "upmCi": {
+    "footprint": "20f0d4533879e922a16a35701389a8a3562d80d6"
   }
 }
